@@ -3,7 +3,11 @@ from ursina import *
 class Enemy(Entity):
     def __init__(self,player,shootables_parent,**kwargs):
         
-        super().__init__(parent=shootables_parent, model='cube', scale_y=2.5, origin_y=-.5, color=color.blue, collider='box', **kwargs)
+        super().__init__(
+            parent=shootables_parent, model='cube', 
+            scale_y=2.5, origin_y=-.5, color=color.blue, 
+            collider='box', **kwargs
+        )
         # self.health_bar = Entity(parent=self, y=1.2, model='cube', color=color.red, world_scale=(1.5,.1,.1))
         self.max_hp = 10
         self.hp = self.max_hp
@@ -20,7 +24,10 @@ class Enemy(Entity):
 
 
         self.look_at_2d(self.player.position, 'y')
-        hit_info = raycast(self.world_position + Vec3(0,1,0), self.forward, 30, ignore=(self,))
+        hit_info = raycast(
+            self.world_position + Vec3(0,1,0), 
+            self.forward, 30, ignore=(self,)
+            )
         # print(hit_info.entity)
         if hit_info.entity == self.player:
             if dist > 2:

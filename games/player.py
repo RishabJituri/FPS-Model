@@ -16,9 +16,11 @@ class player(FirstPersonController):
         self.cursor.color=color.black
         self.position = ground.position
         self.bullets = 50
+        
         self.gun = Entity(model='cube', parent=camera, position=(.5,-.25,.25), scale=(.3,.2,1), origin_z=-.5, color=color.clear, on_cooldown=False)
     
     def shoot(self):
+        print("here")
         if not self.gun.on_cooldown:
             player.bullets-=1
             self.gun.on_cooldown = True
