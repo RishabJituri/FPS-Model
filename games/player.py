@@ -20,14 +20,20 @@ class player(FirstPersonController):
         self.gun = Entity(model='cube', parent=camera, position=(.5,-.25,.25), scale=(.3,.2,1), origin_z=-.5, color=color.clear, on_cooldown=False)
     
     def shoot(self):
-        print("here")
+        
         if not self.gun.on_cooldown:
-            player.bullets-=1
+            self.bullets-=1
             self.gun.on_cooldown = True
             invoke(setattr, self.gun, 'on_cooldown', False, delay=.15)
-            if mouse.hovered_entity and hasattr(mouse.hovered_entity, 'hp'):
+            if mouse.hovered_entity and hasattr(mouse.hovered_entity, 'hp') and distance_xz(self.position,mouse.hovered_entity.position) < 20:
                 mouse.hovered_entity.hp -= 1
                 mouse.hovered_entity.blink(color.red)
+    
+    def update(self):
+        super().update()
+        if held_keys['left mouse']:
+            if self.bullets>0:
+                self.shoot()
     
         
     

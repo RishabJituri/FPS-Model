@@ -90,7 +90,7 @@ class Enemy(Entity):
         # print(hit_info.entity)
         if hit_info.entity == player:
             if dist > 2:
-                self.position += self.forward * time.dt * 5
+                self.position += self.forward * time.dt * 10
             if dist < 5:
                 player.health-= 10*time.dt
                 print(player.health)

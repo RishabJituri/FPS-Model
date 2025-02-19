@@ -12,32 +12,31 @@ class Enemy(Entity):
         self.max_hp = 10
         self.hp = self.max_hp
         self.player = player
-    # def shoot(self):
+    
         
         
     def update(self):
+        
         dist = distance_xz(self.player.position, self.position)
+        
         if  dist < 2:
+            
             return
-
-        # self.health_bar.alpha = max(0, self.health_bar.alpha - time.dt)
-
 
         self.look_at_2d(self.player.position, 'y')
         hit_info = raycast(
             self.world_position + Vec3(0,1,0), 
             self.forward, 30, ignore=(self,)
             )
-        # print(hit_info.entity)
-        if hit_info.entity == self.player:
-            if dist > 2:
-                self.position += self.forward * time.dt * 5
-            if dist < 5:
-                self.player.health-= 10*time.dt
-                print(self.player.health)
-                if self.player.health <= 0:
-                    quit()
-                    return -1
+        
+        if dist > 2:
+            self.position += self.forward * time.dt * 5
+        if dist < 5:
+            self.player.health-= 10*time.dt
+            if self.player.health <= 0:
+                quit()
+                return -1
+        #  
                 
 
     @property
