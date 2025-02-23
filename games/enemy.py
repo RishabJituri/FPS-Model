@@ -1,5 +1,6 @@
 from ursina import *
 
+
 class Enemy(Entity):
     def __init__(self,player,shootables_parent,**kwargs):
         super().__init__(
@@ -10,6 +11,7 @@ class Enemy(Entity):
         self.max_hp = 10
         self.hp = self.max_hp
         self.player = player
+        self.strike = 0
     
     def update(self):
         dist = distance_xz(self.player.position, self.position) 
@@ -23,6 +25,9 @@ class Enemy(Entity):
             self.position += self.forward * time.dt * 5
         if dist < 5:
             self.player.health-= 10*time.dt
+            
+            self.strike+=1
+            
             if self.player.health <= 0:
                 quit()
                 return -1
@@ -35,5 +40,6 @@ class Enemy(Entity):
         self._hp = value
         if value <= 0:
             destroy(self)
+            
             self.player.bullets += 10
             return

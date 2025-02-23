@@ -2,9 +2,10 @@ from ursina import *
 
 from ursina.prefabs.first_person_controller import FirstPersonController
 
-class player(FirstPersonController):
+class player(Entity):
     def __init__(self, ground):
         super().__init__()
+        
         self.model='cube'
         self.z=-10
         self.color=color.orange
@@ -27,7 +28,14 @@ class player(FirstPersonController):
             self.bullets-=1
             self.gun.on_cooldown = True
             invoke(setattr, self.gun, 'on_cooldown', False, delay=.15)
-            if mouse.hovered_entity and hasattr(mouse.hovered_entity, 'hp') and distance_xz(self.position,mouse.hovered_entity.position) < 20:
+            
+            if (mouse.hovered_entity 
+                and 
+                hasattr(mouse.hovered_entity, 'hp') 
+                and 
+                distance_xz(
+                    self.position,mouse.hovered_entity.position)
+                ) < 20:
                 mouse.hovered_entity.hp -= 1
                 mouse.hovered_entity.blink(color.red)
     
