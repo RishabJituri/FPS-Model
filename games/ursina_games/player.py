@@ -2,7 +2,7 @@ from ursina import *
 
 from ursina.prefabs.first_person_controller import FirstPersonController
 
-class player(Entity):
+class player(FirstPersonController):
     def __init__(self, ground):
         super().__init__()
         
@@ -41,9 +41,11 @@ class player(Entity):
     
     def update(self):
         super().update()
+        
         if held_keys['left mouse']:
             if self.bullets>0:
                 self.shoot()
+
     
         
     

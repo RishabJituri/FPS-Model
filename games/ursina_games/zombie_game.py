@@ -8,10 +8,11 @@ from .enemy import Enemy
 import pygame
 
 
+
 class game():
     def __init__(self):
         
-        self.app = Ursina(headless=True,window_type="offscreen")
+        self.app = Ursina(window_type="offscreen")
         self.clock =pygame.time.Clock()
         self.ground = Entity(
             model='plane', collider='box', scale=200, 
@@ -33,7 +34,7 @@ class game():
         self.enemies.append(enemy)
         
     def play(self):
-        mouse.locked = False
+        error_level=0
         # self.app.win.set_visible(False)
         Entity.default_shader = lit_with_shadows_shader
         shootables_parent = Entity()
@@ -46,6 +47,7 @@ class game():
             
         #     self.app.step()
         self.app.run()
+        print(1)
         return 1
         
     

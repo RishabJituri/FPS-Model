@@ -29,8 +29,9 @@ class Enemy(Entity):
             self.strike+=1
             
             if self.player.health <= 0:
+                print(-1)
                 quit()
-                return -1
+                
 
     @property
     def hp(self):return self._hp
